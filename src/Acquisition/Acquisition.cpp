@@ -205,7 +205,12 @@ int AcquireImages(CameraPtr pCam, INodeMap& nodeMap, INodeMap& nodeMapTLDevice)
         //cout << endl;
 
         // Retrieve, convert, and save images
-        const unsigned int k_numImages = 100;
+        const unsigned int k_numImages = 1000;
+
+        using namespace std::chrono;
+        //int64_t startTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+
+        //cout << "Start time: " << startTime << endl; 
 
         for (unsigned int imageCnt = 0; imageCnt < k_numImages; imageCnt++)
         {
@@ -275,7 +280,7 @@ int AcquireImages(CameraPtr pCam, INodeMap& nodeMap, INodeMap& nodeMapTLDevice)
                     // Create a unique filename
                     ostringstream filename;
 
-                    using namespace std::chrono;
+                   // using namespace std::chrono;
                     int64_t timestamp = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
                     std::string time = std::to_string(timestamp);
 
@@ -321,6 +326,10 @@ int AcquireImages(CameraPtr pCam, INodeMap& nodeMap, INodeMap& nodeMapTLDevice)
             }
         }
 
+        //int64_t endTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+
+        //cout << "End time: " << endTime << endl;
+
         //
         // End acquisition
         //
@@ -330,7 +339,7 @@ int AcquireImages(CameraPtr pCam, INodeMap& nodeMap, INodeMap& nodeMapTLDevice)
         //
 
         pCam->EndAcquisition();
-    }
+    } 
     catch (Spinnaker::Exception& e)
     {
         cout << "Error: " << e.what() << endl;
